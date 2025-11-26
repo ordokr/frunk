@@ -9,9 +9,9 @@
 //!
 //! ```
 //! # fn main() {
-//! use frunk::Validated;
-//! use frunk::prelude::*;
-//! use frunk_core::{HList, hlist_pat};
+//! use ordofp::Validated;
+//! use ordofp::prelude::*;
+//! use ordofp_core::{HList, hlist_pat};
 //!
 //! #[derive(PartialEq, Eq, Debug)]
 //! struct Person {
@@ -69,8 +69,8 @@ where
     /// # Examples
     ///
     /// ```
-    /// use frunk::Validated;
-    /// use frunk::prelude::*;
+    /// use ordofp::Validated;
+    /// use ordofp::prelude::*;
     ///
     /// let r1: Result<String, String> = Ok(String::from("hello"));
     /// let v = r1.into_validated();
@@ -85,7 +85,7 @@ where
     /// # Examples
     ///
     /// ```
-    /// use frunk::prelude::*;
+    /// use ordofp::prelude::*;
     ///
     /// let r1: Result<String, i32> = Err(32);
     /// let v = r1.into_validated();
@@ -104,9 +104,9 @@ where
     ///
     /// ```
     /// # fn main() {
-    /// use frunk_core::hlist_pat;
-    /// use frunk::Validated;
-    /// use frunk::prelude::*;
+    /// use ordofp_core::hlist_pat;
+    /// use ordofp::Validated;
+    /// use ordofp::prelude::*;
     ///
     /// #[derive(PartialEq, Eq, Debug)]
     /// struct Person {
@@ -152,7 +152,7 @@ pub trait IntoValidated<T, E> {
     /// # Examples
     ///
     /// ```
-    /// use frunk::prelude::*; // IntoValidated is in the prelude
+    /// use ordofp::prelude::*; // IntoValidated is in the prelude
     ///
     /// let r1: Result<String, i32> = Err(32);
     /// let v = r1.into_validated();
@@ -179,9 +179,9 @@ impl<T, E> IntoValidated<T, E> for Result<T, E> {
 ///
 /// ```
 /// # fn main() {
-/// use frunk::Validated;
-/// use frunk::prelude::*;
-/// use frunk_core::hlist;
+/// use ordofp::Validated;
+/// use ordofp::prelude::*;
+/// use ordofp_core::hlist;
 ///
 /// let r1: Result<String, String> = Ok(String::from("hello"));
 /// let r2: Result<i32, String> = Ok(1);
@@ -209,9 +209,9 @@ where
 ///
 /// ```
 /// # fn main() {
-/// use frunk::Validated;
-/// use frunk::prelude::*;
-/// use frunk_core::hlist;
+/// use ordofp::Validated;
+/// use ordofp::prelude::*;
+/// use ordofp_core::hlist;
 ///
 /// let r1: Result<String, String> = Ok(String::from("hello"));
 /// let r2: Result<i32, String> = Ok(1);
@@ -246,7 +246,7 @@ where
 mod tests {
     use super::*;
     use alloc::{borrow::ToOwned, string::String};
-    use frunk_core::{hlist, hlist_pat};
+    use ordofp_core::{hlist, hlist_pat};
 
     #[test]
     fn test_adding_ok_results() {

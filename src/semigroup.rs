@@ -8,8 +8,8 @@
 
 ```
 # fn main() {
-use frunk::Semigroup;
-use frunk_core::hlist;
+use ordofp::Semigroup;
+use ordofp_core::hlist;
 
 let t1 = (1, 2.5f32, String::from("hi"), Some(3));
 let t2 = (1, 2.5f32, String::from(" world"), None);
@@ -36,7 +36,7 @@ use core::cmp::Ordering;
 #[cfg(feature = "alloc")]
 use core::hash::Hash;
 use core::ops::{BitAnd, BitOr, Deref};
-use frunk_core::hlist::*;
+use ordofp_core::hlist::*;
 #[cfg(feature = "std")]
 use std::collections::hash_map::Entry;
 #[cfg(feature = "std")]
@@ -69,7 +69,7 @@ pub trait Semigroup {
     /// # Examples
     ///
     /// ```
-    /// use frunk::Semigroup;
+    /// use ordofp::Semigroup;
     ///
     /// assert_eq!(Some(1).combine(&Some(2)), Some(3))
     /// ```
@@ -113,7 +113,7 @@ where
 /// # Examples
 ///
 /// ```
-/// use frunk::semigroup::combine_all_option;
+/// use ordofp::semigroup::combine_all_option;
 ///
 /// let v1 = &vec![1, 2, 3];
 /// assert_eq!(combine_all_option(v1), Some(6));
@@ -366,7 +366,7 @@ mod tests {
     #[cfg(feature = "alloc")]
     use alloc::{borrow::ToOwned, vec};
     #[cfg(feature = "alloc")]
-    use frunk_core::hlist;
+    use ordofp_core::hlist;
 
     macro_rules! semigroup_tests {
       ($($name:ident, $comb: expr => $expected: expr, $tr:ty)+) => {

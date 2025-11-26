@@ -1,4 +1,4 @@
-//! Defines a bunch of unit structs with unique types for use by unit tests in frunk.
+//! Defines a bunch of unit structs with unique types for use by unit tests in ordofp.
 //!
 //! The theme is "I need a bunch of types and I need them NOW!"
 

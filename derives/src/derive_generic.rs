@@ -1,4 +1,4 @@
-use frunk_proc_macro_helpers::*;
+use ordofp_proc_macro_helpers::*;
 use proc_macro::TokenStream;
 use quote::ToTokens;
 use syn::Data;
@@ -23,7 +23,7 @@ pub fn impl_generic(input: TokenStream) -> impl ToTokens {
 
             quote! {
                 #[allow(non_snake_case, non_camel_case_types)]
-                impl #impl_generics ::frunk_core::generic::Generic for #name #ty_generics #where_clause {
+                impl #impl_generics ::ordofp_core::generic::Generic for #name #ty_generics #where_clause {
 
                     type Repr = #repr_type;
 

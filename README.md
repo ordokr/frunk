@@ -1,14 +1,14 @@
-# Frunk [![Crates.io](https://img.shields.io/crates/v/frunk.svg)](https://crates.io/crates/frunk) [![Continuous integration](https://github.com/lloydmeta/frunk/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/lloydmeta/frunk/actions/workflows/ci.yml?query=branch%3Amaster) [![Gitter](https://badges.gitter.im/lloydmeta/frunk.svg)](https://gitter.im/lloydmeta/frunk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Frunk](https://docs.rs/frunk/badge.svg)](https://docs.rs/frunk)
+# OrdoFP [![Crates.io](https://img.shields.io/crates/v/ordofp.svg)](https://crates.io/crates/ordofp) [![Continuous integration](https://github.com/lloydmeta/ordofp/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/lloydmeta/ordofp/actions/workflows/ci.yml?query=branch%3Amaster) [![Gitter](https://badges.gitter.im/lloydmeta/ordofp.svg)](https://gitter.im/lloydmeta/ordofp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![OrdoFP](https://docs.rs/ordofp/badge.svg)](https://docs.rs/ordofp)
 
-> **frunk** *frəNGk*
+> **ordofp** *frəNGk*
 >  * Functional programming toolbelt in Rust.
 >  * Might seem funky at first, but you'll like it.
->  * Comes from: funktional (German) + Rust → Frunk
+>  * Comes from: funktional (German) + Rust → OrdoFP
 
 The general idea is to make things easier by providing FP tools in Rust to allow for stuff like this:
 
 ```rust
-use frunk::monoid::combine_all;
+use ordofp::monoid::combine_all;
 
 let v = vec![Some(1), Some(3)];
 assert_eq!(combine_all(&v), Some(4));
@@ -24,8 +24,8 @@ assert_eq!(combine_all(&tuples), expected);
 ```
 
 For a deep dive, RustDocs are available for:
-* Code on [Master](https://beachape.com/frunk)
-* Latest [published release](https://docs.rs/frunk)
+* Code on [Master](https://beachape.com/ordofp)
+* Latest [published release](https://docs.rs/ordofp)
 
 ## Table of Contents
 
@@ -52,7 +52,7 @@ Statically typed heterogeneous lists.
 
 First, let's enable `hlist`:
 ```rust
-use frunk::{HNil, HCons, hlist};
+use ordofp::{HNil, HCons, hlist};
 ```
 
 Some basics:
@@ -164,14 +164,14 @@ that abstract over types and arity, but still have the ability to recover your o
 
 #### Setup
 
-In order to derive the trait `Generic` (or `LabelledGeneric`) you will have to add `frunk_core` dependency
+In order to derive the trait `Generic` (or `LabelledGeneric`) you will have to add `ordofp_core` dependency
 
 ```toml
 [dependencies]
-frunk_core = { version = "$version" }
+ordofp_core = { version = "$version" }
 ```
 
-Frunk comes out of the box with a nice custom `Generic` derivation so that boilerplate is kept to a minimum.
+OrdoFP comes out of the box with a nice custom `Generic` derivation so that boilerplate is kept to a minimum.
 
 Here are some examples:
 
@@ -186,7 +186,7 @@ struct Person<'a> {
 }
 
 let h = hlist!("Joe", "Blow", 30);
-let p: Person = frunk::from_generic(h);
+let p: Person = ordofp::from_generic(h);
 assert_eq!(p,
            Person {
                first_name: "Joe",
@@ -227,7 +227,7 @@ let a_person = ApiPerson {
                    LastName: "Blow",
                    Age: 30,
 };
-let d_person: DomainPerson = frunk::convert_from(a_person); // done
+let d_person: DomainPerson = ordofp::convert_from(a_person); // done
 ```
 
 #### LabelledGeneric
@@ -269,7 +269,7 @@ let n_user = NewUser {
 //
 // Also note that we're using a helper method to avoid having to use universal
 // function call syntax
-let s_user: SavedUser = frunk::labelled_convert_from(n_user);
+let s_user: SavedUser = ordofp::labelled_convert_from(n_user);
 
 assert_eq!(s_user.first_name, "Joe");
 assert_eq!(s_user.last_name, "Blow");
@@ -284,11 +284,11 @@ struct DeletedUser<'a> {
 }
 
 //  This would fail at compile time :)
-let d_user: DeletedUser = frunk::labelled_convert_from(s_user);
+let d_user: DeletedUser = ordofp::labelled_convert_from(s_user);
 
 // This will, however, work, because we make use of the Sculptor type-class
 // to type-safely reshape the representations to align/match each other.
-let d_user: DeletedUser = frunk::transform_from(s_user);
+let d_user: DeletedUser = ordofp::transform_from(s_user);
 ```
 
 ##### Transmogrifying
@@ -304,7 +304,7 @@ of type B, in a typesafe way, as long as A and B are "similarly-shaped".  In oth
 fields and their subfields are subsets of A's fields and their respective subfields, then A can be turned
 into B.
 
-As usual, the goal with Frunk is to do this:
+As usual, the goal with OrdoFP is to do this:
 * Using stable (so no specialisation, which would have been helpful, methinks)
 * Typesafe
 * No usage of `unsafe`
@@ -312,7 +312,7 @@ As usual, the goal with Frunk is to do this:
 Here is an example:
 
 ```rust
-use frunk::labelled::Transmogrifier;
+use ordofp::labelled::Transmogrifier;
 
 #[derive(LabelledGeneric)]
 struct InternalPhoneNumber {
@@ -402,8 +402,8 @@ some of which may be addressed in the future:
   recursive `transmogrify()` is required for your types.
 
 For more information how Generic and Field work, check out their respective Rustdocs:
-  * [Generic](https://beachape.com/frunk/frunk_core/generic/index.html)
-  * [Labelled](https://beachape.com/frunk/frunk_core/labelled/index.html)
+  * [Generic](https://beachape.com/ordofp/ordofp_core/generic/index.html)
+  * [Labelled](https://beachape.com/ordofp/ordofp_core/labelled/index.html)
 
 #### Path
 
@@ -412,7 +412,7 @@ using `Path` and its companion trait `PathTraverser`. In some circles, this func
 called a Lens.
 
 `Path`-based traversals are
-* Easy to use through the procedural macro `path!` (`frunk_proc_macros`)
+* Easy to use through the procedural macro `path!` (`ordofp_proc_macros`)
   * Traversing multiple levels is familiar; just use dot `.` syntax (`path!(nested.attribute.value)`)
 * Compile-time safe
 * Composable (add one to the other using `+`)
@@ -503,10 +503,10 @@ See `examples/paths.rs` to see how this works.
 
 If you've ever wanted to have an adhoc union / sum type of types that you do not control, you may want
 to take a look at `Coproduct`. In Rust, thanks to `enum`, you could potentially declare one every time you
-want a sum type to do this, but there is a light-weight way of doing it through Frunk:
+want a sum type to do this, but there is a light-weight way of doing it through OrdoFP:
 
 ```rust
-use frunk::prelude::*; // for the fold method
+use ordofp::prelude::*; // for the fold method
 
 // Declare the types we want in our Coproduct
 type I32F32Bool = Coprod!(i32, f32, bool);
@@ -533,7 +533,7 @@ assert_eq!(
     "int 3".to_string());
 ```
 
-For more information, check out the [docs for Coproduct](https://beachape.com/frunk/frunk/coproduct/index.html)
+For more information, check out the [docs for Coproduct](https://beachape.com/ordofp/ordofp/coproduct/index.html)
 
 ### Validated
 
@@ -548,7 +548,7 @@ best by [the Cats project](http://typelevel.org/cats/datatypes/validated.html)).
 
 To use `Validated`, first:
 ```rust
-use frunk::prelude::*; // for Result::into_validated
+use ordofp::prelude::*; // for Result::into_validated
 ```
 
 Assuming we have a `Person` struct defined
@@ -615,8 +615,8 @@ assert_eq!(try_person2.unwrap_err(),
 Things that can be combined.
 
 ```rust
-use frunk::Semigroup;
-use frunk::semigroup::All;
+use ordofp::Semigroup;
+use ordofp::semigroup::All;
 
 assert_eq!(Some(1).combine(&Some(2)), Some(3));
 
@@ -629,7 +629,7 @@ assert_eq!(All(true).combine(&All(false)), All(false));
 Things that can be combined *and* have an empty/id value.
 
 ```rust
-use frunk::monoid::combine_all;
+use ordofp::monoid::combine_all;
 
 let t1 = (1, 2.5f32, String::from("hi"), Some(3));
 let t2 = (1, 2.5f32, String::from(" world"), None);
@@ -645,22 +645,22 @@ assert_eq!(combine_all(&product_nums), Product(24))
 
 ### Features
 
-Frunk comes with support for deriving [serde](https://github.com/serde-rs/serde) serializer/deserializers for its core
+OrdoFP comes with support for deriving [serde](https://github.com/serde-rs/serde) serializer/deserializers for its core
 data structures. This can be enabled by adding the `serde` feature flag.
 
-For example, if you'd like to use just `frunk_core` with serde
+For example, if you'd like to use just `ordofp_core` with serde
 
 ```toml
 [dependencies]
-frunk_core = { version = "$version", features = ["serde"] }
+ordofp_core = { version = "$version", features = ["serde"] }
 ```
 
-Or, if you'd like to use `frunk` with serde, you need to explicitly include `frunk_core` as well
+Or, if you'd like to use `ordofp` with serde, you need to explicitly include `ordofp_core` as well
 
 ```toml
 [dependencies]
-frunk = { version = "$version", features = ["serde"] }
-frunk_core = { version = "$version", features = ["serde"] }
+ordofp = { version = "$version", features = ["serde"] }
+ordofp_core = { version = "$version", features = ["serde"] }
 ```
 
 ### Benchmarks
@@ -669,7 +669,7 @@ Benchmarks are available in `./benches` and can be run with:
 
 `$ rustup run nightly cargo bench`
 
-Benchmarks on `master` are also [auto-generated, uploaded and available online](https://beachape.com/frunk/dev/bench).
+Benchmarks on `master` are also [auto-generated, uploaded and available online](https://beachape.com/ordofp/dev/bench).
 
 ## Todo
 

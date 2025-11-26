@@ -1,10 +1,10 @@
-use frunk::hlist::Sculptor;
-use frunk::labelled::chars::*;
-use frunk::labelled::Field;
-use frunk::labelled::Transmogrifier;
-use frunk::{from_labelled_generic, into_labelled_generic, transform_from};
-use frunk::{Coproduct, HCons, LabelledGeneric};
-use frunk_core::{field, hlist};
+use ordofp::hlist::Sculptor;
+use ordofp::labelled::chars::*;
+use ordofp::labelled::Field;
+use ordofp::labelled::Transmogrifier;
+use ordofp::{from_labelled_generic, into_labelled_generic, transform_from};
+use ordofp::{Coproduct, HCons, LabelledGeneric};
+use ordofp_core::{field, hlist};
 use time::OffsetDateTime;
 
 mod common;

@@ -1,14 +1,14 @@
 #![recursion_limit = "128"]
 #![doc(html_playground_url = "https://play.rust-lang.org/")]
-//! Frunk Derives
+//! OrdoFP Derives
 //!
-//! This library holds logic for the nice custom derives in Frunk.
+//! This library holds logic for the nice custom derives in OrdoFP.
 //!
 //! Links:
-//!   1. [Source on Github](https://github.com/lloydmeta/frunk)
-//!   2. [Crates.io page](https://crates.io/crates/frunk)
+//!   1. [Source on Github](https://github.com/lloydmeta/ordofp)
+//!   2. [Crates.io page](https://crates.io/crates/ordofp)
 
-extern crate frunk_proc_macro_helpers;
+extern crate ordofp_proc_macro_helpers;
 extern crate proc_macro;
 
 #[macro_use]
@@ -42,7 +42,7 @@ pub fn generic(input: TokenStream) -> TokenStream {
 ///
 /// There *may* be problems if your field names contain certain characters.
 /// This can be solved by adding letters to the create_enums_for! macro invocation
-/// in frunk_core::labelled via a PR :)
+/// in ordofp_core::labelled via a PR :)
 #[proc_macro_derive(LabelledGeneric)]
 pub fn labelled_generic(input: TokenStream) -> TokenStream {
     // Build the impl

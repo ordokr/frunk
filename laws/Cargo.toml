@@ -1,21 +1,21 @@
 [package]
-name = "frunk_laws"
+name = "ordofp_laws"
 edition = "2021"
-version = "0.5.3"
+version = "0.5.0"
 authors = ["Lloyd <lloydmeta@gmail.com>"]
-description = "frunk_laws contains laws for algebras declared in Frunk."
+description = "ordofp_laws contains laws for algebras declared in OrdoFP."
 license = "MIT"
-documentation = "https://docs.rs/frunk_laws"
-repository = "https://github.com/lloydmeta/frunk"
-keywords = ["Frunk", "laws", "testing", "algebras"]
+documentation = "https://docs.rs/ordofp_laws"
+repository = "https://github.com/lloydmeta/ordofp"
+keywords = ["OrdoFP", "laws", "testing", "algebras"]
 
 [badges]
-travis-ci = { repository = "lloydmeta/frunk" }
+travis-ci = { repository = "lloydmeta/ordofp" }
 
-[dependencies.frunk]
+[dependencies.ordofp]
 path = ".."
 default-features = false
-version = "0.4.4"
+version = "0.5.0"
 features = ["std"]
 
 [dependencies]

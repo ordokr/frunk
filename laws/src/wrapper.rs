@@ -2,8 +2,8 @@
 //! instances of typeclasses that we don't define for types we don't
 //! own
 
-use frunk::monoid::*;
-use frunk::semigroup::*;
+use ordofp::monoid::*;
+use ordofp::semigroup::*;
 use quickcheck::*;
 
 /// The Wrapper NewType. Used for writing implementations of traits

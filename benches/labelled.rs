@@ -1,16 +1,16 @@
 #![feature(test)]
 
 #[macro_use]
-extern crate frunk;
+extern crate ordofp;
 #[macro_use]
-extern crate frunk_core;
+extern crate ordofp_core;
 extern crate test;
 
-use frunk::labelled::*;
+use ordofp::labelled::*;
 use std::convert::From;
 use test::Bencher;
 
-use frunk_core::labelled::chars::*;
+use ordofp_core::labelled::chars::*;
 
 #[derive(LabelledGeneric)]
 struct NewUser<'a> {

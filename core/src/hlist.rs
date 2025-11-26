@@ -7,7 +7,7 @@
 //!
 //! ```
 //! # fn main() {
-//! use frunk_core::{hlist, HList, poly_fn};
+//! use ordofp_core::{hlist, HList, poly_fn};
 //!
 //! let h = hlist![1, "hi"];
 //! assert_eq!(h.len(), 2);
@@ -75,8 +75,8 @@ pub trait HList: Sized {
     /// # Examples
     /// ```
     /// # fn main() {
-    /// use frunk::prelude::*;
-    /// use frunk_core::HList;
+    /// use ordofp::prelude::*;
+    /// use ordofp_core::HList;
     ///
     /// assert_eq!(<HList![i32, bool, f32]>::LEN, 3);
     /// # }
@@ -89,7 +89,7 @@ pub trait HList: Sized {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk_core::hlist;
+    /// use ordofp_core::hlist;
     ///
     /// let h = hlist![1, "hi"];
     /// assert_eq!(h.len(), 2);
@@ -106,7 +106,7 @@ pub trait HList: Sized {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk_core::hlist;
+    /// use ordofp_core::hlist;
     ///
     /// let h = hlist![];
     /// assert!(h.is_empty());
@@ -123,8 +123,8 @@ pub trait HList: Sized {
     /// # Examples
     /// ```
     /// # fn main() {
-    /// use frunk::prelude::*;
-    /// use frunk_core::HList;
+    /// use ordofp::prelude::*;
+    /// use ordofp_core::HList;
     ///
     /// assert_eq!(<HList![i32, bool, f32]>::static_len(), 3);
     /// # }
@@ -138,7 +138,7 @@ pub trait HList: Sized {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk_core::hlist;
+    /// use ordofp_core::hlist;
     ///
     /// let h1 = hlist![1, "hi"];
     /// let h2 = h1.prepend(true);
@@ -160,7 +160,7 @@ pub trait HList: Sized {
 /// # Examples
 ///
 /// ```
-/// # use frunk_core::hlist::{h_cons, HNil};
+/// # use ordofp_core::hlist::{h_cons, HNil};
 /// let h = h_cons(1, HNil);
 /// let h = h.head;
 /// assert_eq!(h, 1);
@@ -200,7 +200,7 @@ impl<H, T> HCons<H, T> {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk_core::hlist;
+    /// use ordofp_core::hlist;
     ///
     /// let h = hlist!("hi");
     /// let (h, tail) = h.pop();
@@ -220,8 +220,8 @@ impl<H, T> HCons<H, T> {
 /// # Examples
 ///
 /// ```
-/// # extern crate frunk; fn main() {
-/// use frunk::hlist::{HNil, h_cons};
+/// # extern crate ordofp; fn main() {
+/// use ordofp::hlist::{HNil, h_cons};
 ///
 /// let h_list = h_cons("what", h_cons(1.23f32, HNil));
 /// let (h1, h2) = h_list.into_tuple2();
@@ -244,7 +244,7 @@ macro_rules! gen_inherent_methods {
             ///
             /// ```
             /// # fn main() {
-            /// use frunk_core::hlist;
+            /// use ordofp_core::hlist;
             ///
             /// let h = hlist![1, "hi"];
             /// assert_eq!(h.len(), 2);
@@ -263,7 +263,7 @@ macro_rules! gen_inherent_methods {
             ///
             /// ```
             /// # fn main() {
-            /// use frunk_core::hlist;
+            /// use ordofp_core::hlist;
             ///
             /// let h = hlist![];
             /// assert!(h.is_empty());
@@ -282,7 +282,7 @@ macro_rules! gen_inherent_methods {
             ///
             /// ```
             /// # fn main() {
-            /// use frunk_core::hlist;
+            /// use ordofp_core::hlist;
             ///
             /// let h1 = hlist![1, "hi"];
             /// let h2 = h1.prepend(true);
@@ -310,7 +310,7 @@ macro_rules! gen_inherent_methods {
             ///
             /// ```
             /// # fn main() {
-            /// use frunk_core::{hlist, HList};
+            /// use ordofp_core::{hlist, HList};
             ///
             /// let h = hlist![9000, "joe", 41f32, true];
             /// let (reshaped, remainder): (HList![f32, i32, &str], _) = h.sculpt();
@@ -331,7 +331,7 @@ macro_rules! gen_inherent_methods {
             ///
             /// ```
             /// # fn main() {
-            /// use frunk_core::hlist;
+            /// use ordofp_core::hlist;
             ///
             /// assert_eq!(hlist![].into_reverse(), hlist![]);
             ///
@@ -355,7 +355,7 @@ macro_rules! gen_inherent_methods {
             ///
             /// ```
             /// # fn main() {
-            /// use frunk_core::hlist;
+            /// use ordofp_core::hlist;
             ///
             /// assert_eq!(hlist![].to_ref(), hlist![]);
             ///
@@ -377,7 +377,7 @@ macro_rules! gen_inherent_methods {
             ///
             /// ```
             /// # fn main() {
-            /// use frunk_core::hlist;
+            /// use ordofp_core::hlist;
             ///
             /// assert_eq!(hlist![].to_mut(), hlist![]);
             ///
@@ -408,8 +408,8 @@ macro_rules! gen_inherent_methods {
             ///
             /// ```
             /// # fn main() {
-            /// use frunk::HNil;
-            /// use frunk_core::hlist;
+            /// use ordofp::HNil;
+            /// use ordofp_core::hlist;
             ///
             /// assert_eq!(HNil.map(HNil), HNil);
             ///
@@ -449,8 +449,8 @@ macro_rules! gen_inherent_methods {
             ///
             /// ```
             /// # fn main() {
-            /// use frunk::HNil;
-            /// use frunk_core::hlist;
+            /// use ordofp::HNil;
+            /// use ordofp_core::hlist;
             ///
             /// assert_eq!(HNil.zip(HNil), HNil);
             ///
@@ -502,7 +502,7 @@ macro_rules! gen_inherent_methods {
             ///
             /// ```
             /// # fn main() {
-            /// use frunk_core::hlist;
+            /// use ordofp_core::hlist;
             ///
             /// let nil = hlist![];
             ///
@@ -593,7 +593,7 @@ macro_rules! gen_inherent_methods {
             ///
             /// ```
             /// # fn main() {
-            /// use frunk_core::hlist;
+            /// use ordofp_core::hlist;
             ///
             /// let nil = hlist![];
             ///
@@ -633,7 +633,7 @@ macro_rules! gen_inherent_methods {
             /// # Examples
             ///
             /// ```
-            /// use frunk_core::hlist;
+            /// use ordofp_core::hlist;
             ///
             /// let first = hlist![0u8, 1u16];
             /// let second = hlist![2u32, 3u64];
@@ -669,7 +669,7 @@ impl<Head, Tail> HCons<Head, Tail> {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk_core::hlist;
+    /// use ordofp_core::hlist;
     ///
     /// let h = hlist![1i32, 2u32, "hello", true, 42f32];
     ///
@@ -701,7 +701,7 @@ impl<Head, Tail> HCons<Head, Tail> {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk_core::hlist;
+    /// use ordofp_core::hlist;
     ///
     /// let mut h = hlist![1i32, true];
     ///
@@ -729,7 +729,7 @@ impl<Head, Tail> HCons<Head, Tail> {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk_core::hlist;
+    /// use ordofp_core::hlist;
     ///
     /// let list = hlist![1, "hello", true, 42f32];
     ///
@@ -761,7 +761,7 @@ impl<Head, Tail> HCons<Head, Tail> {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk_core::hlist;
+    /// use ordofp_core::hlist;
     ///
     /// let h = hlist![1, "hello", true, 42f32];
     ///
@@ -1394,7 +1394,7 @@ where
 ///
 /// ```
 /// # fn main() {
-/// use frunk_core::hlist;
+/// use ordofp_core::hlist;
 ///
 /// let h = hlist![1, 2, 3, 4, 5];
 ///
@@ -1512,9 +1512,9 @@ impl<T: Default, Tail: Default + HList> Default for HCons<T, Tail> {
 ///
 /// ```
 /// # fn main() {
-/// use frunk::lift_from;
-/// use frunk::prelude::*;
-/// use frunk_core::{HList, hlist};
+/// use ordofp::lift_from;
+/// use ordofp::prelude::*;
+/// use ordofp_core::{HList, hlist};
 ///
 /// type H = HList![(), usize, f64, (), bool];
 ///
@@ -1541,8 +1541,8 @@ pub fn lift_from<I, T, PF: LiftFrom<T, I>>(part: T) -> PF {
 ///
 /// ```
 /// # fn main() {
-/// use frunk::prelude::*;
-/// use frunk_core::{HList, hlist};
+/// use ordofp::prelude::*;
+/// use ordofp_core::{HList, hlist};
 ///
 /// type H = HList![(), usize, f64, (), bool];
 ///

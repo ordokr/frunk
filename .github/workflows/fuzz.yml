@@ -1,0 +1,27 @@
+name: Fuzzing
+
+on: [push, pull_request]
+
+jobs:
+  fuzz:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@nightly
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-fuzz-${{ hashFiles('**/Cargo.lock') }}
+      
+      - name: Install cargo-fuzz
+        run: cargo install cargo-fuzz || true
+        
+      - name: Run fuzz target
+        run: |
+          cd fuzz
+          cargo fuzz run generic_convert -- -max_total_time=10

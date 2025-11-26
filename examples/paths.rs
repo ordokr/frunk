@@ -1,6 +1,6 @@
-use frunk::LabelledGeneric;
-use frunk_core::path::PathTraverser;
-use frunk_proc_macros::{path, Path};
+use ordofp::LabelledGeneric;
+use ordofp_core::path::PathTraverser;
+use ordofp_proc_macros::{path, Path};
 
 #[derive(LabelledGeneric)]
 struct Dog<'a> {

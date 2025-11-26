@@ -3,7 +3,7 @@ participant core as c
 participant proc_macro_helpers as pmh
 participant proc_macros as pm
 participant derives as d
-participant frunk as f
+participant ordofp as f
 participant laws as l
 
 c --> d: dev-dependency

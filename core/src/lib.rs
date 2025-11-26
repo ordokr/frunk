@@ -1,15 +1,15 @@
 #![no_std]
 #![doc(html_playground_url = "https://play.rust-lang.org/")]
-//! Frunk Core
+//! OrdoFP Core
 //!
-//! This library forms the core of Frunk. It should ideally be minimalistic,
+//! This library forms the core of OrdoFP. It should ideally be minimalistic,
 //! containing only the fundamental building blocks of generic programming.
 //!
 //! # Examples
 //!
 //! ```
-//! # use frunk_core::hlist::*;
-//! # use frunk_core::{hlist, HList};
+//! # use ordofp_core::hlist::*;
+//! # use ordofp_core::{hlist, HList};
 //! # fn main() {
 //!
 //! let h = hlist![1, false, 42f32];
@@ -55,8 +55,8 @@
 //! ```
 //!
 //! Links:
-//!   1. [Source on Github](https://github.com/lloydmeta/frunk)
-//!   2. [Crates.io page](https://crates.io/crates/frunk)
+//!   1. [Source on Github](https://github.com/lloydmeta/ordofp)
+//!   2. [Crates.io page](https://crates.io/crates/ordofp)
 
 #[cfg(test)]
 extern crate std;
@@ -68,6 +68,7 @@ extern crate alloc;
 mod macros;
 
 pub mod coproduct;
+pub mod gat;
 pub mod generic;
 pub mod hlist;
 pub mod indices;

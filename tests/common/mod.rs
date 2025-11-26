@@ -2,7 +2,7 @@ extern crate time;
 
 use self::time::*;
 #[allow(unused_imports)]
-use frunk::*;
+use ordofp::*;
 
 #[derive(Generic, Debug, PartialEq, Eq)]
 pub struct Person<'a> {

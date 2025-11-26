@@ -1,16 +1,16 @@
 [package]
-name = "frunk_proc_macros"
+name = "ordofp_proc_macros"
 edition = "2021"
-version = "0.1.4"
+version = "0.5.0"
 authors = ["Lloyd <lloydmeta@gmail.com>"]
-description = "Proc macros for Frunk"
+description = "Proc macros for OrdoFP"
 license = "MIT"
-documentation = "https://docs.rs/frunk_proc_macros"
-repository = "https://github.com/lloydmeta/frunk"
-keywords = ["Frunk", "macros"]
+documentation = "https://docs.rs/ordofp_proc_macros"
+repository = "https://github.com/lloydmeta/ordofp"
+keywords = ["OrdoFP", "macros"]
 
 [badges]
-travis-ci = { repository = "lloydmeta/frunk" }
+travis-ci = { repository = "lloydmeta/ordofp" }
 
 [dependencies]
 syn = "2"
@@ -20,12 +20,12 @@ quote = "1"
 proc-macro = true
 
 
-[dependencies.frunk_core]
+[dependencies.ordofp_core]
 path = "../core"
 default-features = false
-version = "0.4.4"
+version = "0.5.0"
 
-[dependencies.frunk_proc_macro_helpers]
+[dependencies.ordofp_proc_macro_helpers]
 path = "../proc-macro-helpers"
 default-features = false
-version = "0.1.4"
+version = "0.5.0"

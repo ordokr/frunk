@@ -1,4 +1,4 @@
-use frunk::{hlist, hlist_pat, Generic};
+use ordofp::{hlist, hlist_pat, Generic};
 
 #[derive(Generic, Debug, PartialEq)]
 struct Person<'a> {
@@ -16,7 +16,7 @@ struct Person2<'a> {
 
 fn main() {
     let repr = hlist!("Joe", "Blow", 30);
-    let person: Person = frunk::from_generic(repr);
+    let person: Person = ordofp::from_generic(repr);
     assert_eq!(
         person,
         Person {
@@ -27,13 +27,13 @@ fn main() {
     );
     println!("{}", person.first_name);
 
-    let older_person = frunk::map_repr(person, |repr| {
+    let older_person = ordofp::map_repr(person, |repr| {
         let hlist_pat![first, last, age] = repr;
         hlist![first, last, age * 2]
     });
     assert_eq!(older_person.age, 60);
 
-    let oldest_person = frunk::map_inter(older_person, |p| Person2 {
+    let oldest_person = ordofp::map_inter(older_person, |p| Person2 {
         age_of_person: 90,
         ..p
     });
@@ -45,7 +45,7 @@ fn main() {
         last_name: "peep",
         age: 30,
     };
-    let generic = frunk::into_generic(peep);
+    let generic = ordofp::into_generic(peep);
     // mapping each one
     let _ = generic.map(hlist![
         |first_name| println!("First name: {}", first_name),

@@ -1,10 +1,10 @@
 #![doc(html_playground_url = "https://play.rust-lang.org/")]
-//! Frunk Laws
+//! OrdoFP Laws
 //!
 //! This library contains laws that can be used to test the implementation of
-//! algebras declared in Frunk
+//! algebras declared in OrdoFP
 
-extern crate frunk;
+extern crate ordofp;
 extern crate quickcheck;
 
 pub mod monoid_laws;

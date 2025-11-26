@@ -1,9 +1,9 @@
 #![feature(test)]
 
-extern crate frunk;
+extern crate ordofp;
 extern crate test;
 
-use frunk::monoid::*;
+use ordofp::monoid::*;
 use test::Bencher;
 
 #[bench]
