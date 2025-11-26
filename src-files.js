@@ -1,0 +1,2 @@
+createSrcSidebar('[["ordofp",["",[],["lib.rs","monoid.rs","semigroup.rs","validated.rs"]]],["ordofp_core",["",[],["coproduct.rs","gat.rs","generic.rs","hlist.rs","indices.rs","labelled.rs","lib.rs","macros.rs","path.rs","traits.rs","tuples.rs"]]],["ordofp_derives",["",[],["derive_generic.rs","derive_labelled_generic.rs","lib.rs"]]],["ordofp_laws",["",[],["lib.rs","monoid_laws.rs","semigroup_laws.rs","wrapper.rs"]]],["ordofp_proc_macro_helpers",["",[],["lib.rs"]]],["ordofp_proc_macros",["",[],["lib.rs"]]]]');
+//{"start":19,"fragment_lengths":[71,156,87,85,49,42]}

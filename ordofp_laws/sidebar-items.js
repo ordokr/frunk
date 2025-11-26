@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["monoid_laws","semigroup_laws","wrapper"]};

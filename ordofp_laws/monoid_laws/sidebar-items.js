@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["left_identity","right_identity"]};
