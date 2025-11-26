@@ -3,8 +3,8 @@
 //! documentation.
 //!
 //! ```
-//! # use frunk_core::hlist::*;
-//! # use frunk_core::{hlist, HList};
+//! # use ordofp_core::hlist::*;
+//! # use ordofp_core::{hlist, HList};
 //! # fn main() {
 //! let h = hlist![ 42f32, true, "hello" ];
 //! let t: (f32, bool, &str) = h.into();

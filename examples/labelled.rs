@@ -1,5 +1,5 @@
-use frunk::labelled::*;
-use frunk::{hlist, LabelledGeneric};
+use ordofp::labelled::*;
+use ordofp::{hlist, LabelledGeneric};
 
 #[derive(LabelledGeneric)]
 struct NewUser<'a> {
@@ -69,13 +69,13 @@ fn main() {
         age: 30,
     };
 
-    let s_user: SavedUser = frunk::labelled_convert_from(n_user);
+    let s_user: SavedUser = ordofp::labelled_convert_from(n_user);
 
     assert_eq!(s_user.first_name, "Joe");
     assert_eq!(s_user.last_name, "Blow");
     assert_eq!(s_user.age, 30);
 
-    let d_user: DeletedUser = frunk::transform_from(s_user);
+    let d_user: DeletedUser = ordofp::transform_from(s_user);
 
     assert_eq!(d_user.first_name, "Joe");
     println!("{}", d_user.last_name);
@@ -104,7 +104,7 @@ fn main() {
         last_name: "peep",
         age: 30,
     };
-    let labelled_generic = frunk::into_labelled_generic(peep);
+    let labelled_generic = ordofp::into_labelled_generic(peep);
 
     let _ = labelled_generic.map(hlist![
         |f: Field<_, _>| println!("{}: {}", f.name, f.value),

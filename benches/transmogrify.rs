@@ -2,12 +2,12 @@
 #![allow(dead_code, unused)]
 
 #[macro_use]
-extern crate frunk;
+extern crate ordofp;
 #[macro_use]
-extern crate frunk_core;
+extern crate ordofp_core;
 extern crate test;
 
-use frunk::labelled::Transmogrifier;
+use ordofp::labelled::Transmogrifier;
 use std::convert::From;
 use test::Bencher;
 

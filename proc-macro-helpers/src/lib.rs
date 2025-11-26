@@ -1,13 +1,13 @@
 #![doc(html_playground_url = "https://play.rust-lang.org/")]
-//! Frunk Proc Macro internals
+//! OrdoFP Proc Macro internals
 //!
-//! This library holds common logic for procedural macros used by frunk
+//! This library holds common logic for procedural macros used by ordofp
 //!
 //! Links:
-//!   1. [Source on Github](https://github.com/lloydmeta/frunk)
-//!   2. [Crates.io page](https://crates.io/crates/frunk)
+//!   1. [Source on Github](https://github.com/lloydmeta/ordofp)
+//!   2. [Crates.io page](https://crates.io/crates/ordofp)
 
-extern crate frunk_core;
+extern crate ordofp_core;
 extern crate proc_macro;
 extern crate proc_macro2;
 
@@ -24,14 +24,14 @@ use syn::{
     Member, Variant,
 };
 
-/// These are assumed to exist as enums in frunk_core::labelled
+/// These are assumed to exist as enums in ordofp_core::labelled
 const ALPHA_CHARS: &[char] = &[
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
     't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
     'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
 ];
 
-/// These are assumed to exist as enums in frunk_core::labelled as underscore prepended enums
+/// These are assumed to exist as enums in ordofp_core::labelled as underscore prepended enums
 const UNDERSCORE_CHARS: &[char] = &['_', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 /// Parses a TokenStream (usually received as input into a
@@ -54,9 +54,9 @@ where
     L::Item: ToTokens,
     L::IntoIter: DoubleEndedIterator,
 {
-    let mut result = quote! { ::frunk_core::hlist::HNil };
+    let mut result = quote! { ::ordofp_core::hlist::HNil };
     for item in items.into_iter().rev() {
-        result = quote! { ::frunk_core::hlist::HCons<#item, #result> }
+        result = quote! { ::ordofp_core::hlist::HCons<#item, #result> }
     }
     result
 }
@@ -68,9 +68,9 @@ where
     L::Item: ToTokens,
     L::IntoIter: DoubleEndedIterator,
 {
-    let mut result = quote! { ::frunk_core::hlist::HNil };
+    let mut result = quote! { ::ordofp_core::hlist::HNil };
     for item in items.into_iter().rev() {
-        result = quote! { ::frunk_core::hlist::HCons { head: #item, tail: #result }}
+        result = quote! { ::ordofp_core::hlist::HCons { head: #item, tail: #result }}
     }
     result
 }
@@ -82,9 +82,9 @@ where
     L::Item: ToTokens,
     L::IntoIter: DoubleEndedIterator,
 {
-    let mut result = quote! { ::frunk_core::coproduct::CNil };
+    let mut result = quote! { ::ordofp_core::coproduct::CNil };
     for item in items.into_iter().rev() {
-        result = quote! { ::frunk_core::coproduct::Coproduct<#item, #result> }
+        result = quote! { ::ordofp_core::coproduct::Coproduct<#item, #result> }
     }
     result
 }
@@ -92,9 +92,9 @@ where
 /// Given an index and an expression or pattern, creates an AST for the corresponding Coproduct
 /// constructor, which may itself be used as an expression or a pattern.
 pub fn build_coprod_constr(index: usize, item: impl ToTokens) -> TokenStream2 {
-    let mut result = quote! { ::frunk_core::coproduct::Coproduct::Inl(#item) };
+    let mut result = quote! { ::ordofp_core::coproduct::Coproduct::Inl(#item) };
     for _ in 0..index {
-        result = quote! { ::frunk_core::coproduct::Coproduct::Inr(#result) }
+        result = quote! { ::ordofp_core::coproduct::Coproduct::Inr(#result) }
     }
     result
 }
@@ -103,32 +103,32 @@ pub fn build_coprod_constr(index: usize, item: impl ToTokens) -> TokenStream2 {
 /// the CNil case in order to work around limitations in the compiler's exhaustiveness
 /// checking.
 pub fn build_coprod_unreachable_arm(length: usize, deref: bool) -> TokenStream2 {
-    let mut result = quote! { _frunk_unreachable_ };
+    let mut result = quote! { _ordofp_unreachable_ };
     for _ in 0..length {
-        result = quote! { ::frunk_core::coproduct::Coproduct::Inr(#result)}
+        result = quote! { ::ordofp_core::coproduct::Coproduct::Inr(#result)}
     }
     if deref {
-        quote! { #result => match *_frunk_unreachable_ {} }
+        quote! { #result => match *_ordofp_unreachable_ {} }
     } else {
-        quote! { #result => match _frunk_unreachable_ {} }
+        quote! { #result => match _ordofp_unreachable_ {} }
     }
 }
 
 pub fn build_field_type(name: &Ident, inner_type: impl ToTokens) -> TokenStream2 {
     let label_type = build_label_type(name);
-    quote! { ::frunk_core::labelled::Field<#label_type, #inner_type> }
+    quote! { ::ordofp_core::labelled::Field<#label_type, #inner_type> }
 }
 pub fn build_field_expr(name: &Ident, inner_expr: impl ToTokens) -> TokenStream2 {
     let label_type = build_label_type(name);
     let literal_name = name.to_string();
-    quote! { ::frunk_core::labelled::field_with_name::<#label_type, _>(#literal_name, #inner_expr) }
+    quote! { ::ordofp_core::labelled::field_with_name::<#label_type, _>(#literal_name, #inner_expr) }
 }
 pub fn build_field_pat(inner_pat: impl ToTokens) -> TokenStream2 {
-    quote! { ::frunk_core::labelled::Field { value: #inner_pat, .. } }
+    quote! { ::ordofp_core::labelled::Field { value: #inner_pat, .. } }
 }
 
 /// Given an Ident returns an AST for its type level representation based on the
-/// enums generated in frunk_core::labelled.
+/// enums generated in ordofp_core::labelled.
 ///
 /// For example, given first_name, returns an AST for (f,i,r,s,t,__,n,a,m,e)
 pub fn build_label_type(ident: &Ident) -> impl ToTokens {
@@ -138,7 +138,7 @@ pub fn build_label_type(ident: &Ident) -> impl ToTokens {
     let name_as_tokens: Vec<_> = name_as_idents
         .iter()
         .map(|ident| {
-            quote! { ::frunk_core::labelled::chars::#ident }
+            quote! { ::ordofp_core::labelled::chars::#ident }
         })
         .collect();
     quote! { (#(#name_as_tokens),*) }
@@ -150,7 +150,7 @@ pub fn build_label_type(ident: &Ident) -> impl ToTokens {
 /// or needs to be encoded as an underscored character (_ and numbers),
 /// or needs to be encoded as a unicode.
 ///
-/// This method assumes that _uc and uc_ are in frunk_core::labelled as enums
+/// This method assumes that _uc and uc_ are in ordofp_core::labelled as enums
 fn encode_as_ident(c: &char) -> Vec<Ident> {
     if ALPHA_CHARS.contains(c) {
         vec![call_site_ident(&c.to_string())]
@@ -177,10 +177,10 @@ pub fn build_path_type(path_expr: Expr) -> impl ToTokens {
     idents
         .iter()
         .map(build_label_type)
-        .fold(quote!(::frunk_core::hlist::HNil), |acc, t| {
+        .fold(quote!(::ordofp_core::hlist::HNil), |acc, t| {
             quote! {
-            ::frunk_core::path::Path<
-                ::frunk_core::hlist::HCons<
+            ::ordofp_core::path::Path<
+                ::ordofp_core::hlist::HCons<
                    #t,
                    #acc
                 >
@@ -236,11 +236,11 @@ impl FieldBinding {
     }
     pub fn build_type_ref(&self) -> TokenStream2 {
         let ty = &self.field.ty;
-        quote! { &'_frunk_ref_ #ty }
+        quote! { &'_ordofp_ref_ #ty }
     }
     pub fn build_type_mut(&self) -> TokenStream2 {
         let ty = &self.field.ty;
-        quote! { &'_frunk_ref_ mut #ty }
+        quote! { &'_ordofp_ref_ mut #ty }
     }
     pub fn build(&self) -> TokenStream2 {
         let binding = &self.binding;
@@ -324,7 +324,7 @@ pub fn ref_generics(generics: &Generics) -> Generics {
     let mut generics_ref = generics.clone();
 
     // instantiate a lifetime and lifetime def to add
-    let ref_lifetime = Lifetime::new("'_frunk_ref_", Span::call_site());
+    let ref_lifetime = Lifetime::new("'_ordofp_ref_", Span::call_site());
     let ref_lifetime_def = LifetimeParam::new(ref_lifetime.clone());
 
     // Constrain the generic lifetimes present in the concrete type to the reference lifetime

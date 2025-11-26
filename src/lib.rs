@@ -1,6 +1,6 @@
 #![no_std]
 #![doc(html_playground_url = "https://play.rust-lang.org/")]
-//! Frunk: generic functional programming toolbelt for Rust
+//! OrdoFP: generic functional programming toolbelt for Rust
 //!
 //! Aims to be a collection of functional programming abstractions implemented in Rust
 //! in effective, useful, and idiomatic ways. Examples of things that are included in rust are:
@@ -15,12 +15,12 @@
 #![cfg_attr(
     feature = "alloc",
     doc = r#"
-Here is a small taste of what Frunk has to offer:
+Here is a small taste of what OrdoFP has to offer:
 
 ```
 # fn main() {
-use frunk::prelude::*;
-use frunk::{self, hlist, hlist_pat, LabelledGeneric, monoid, Semigroup, Generic};
+use ordofp::prelude::*;
+use ordofp::{self, hlist, hlist_pat, LabelledGeneric, monoid, Semigroup, Generic};
 
 // Combining Monoids
 let v = vec![Some(1), Some(3)];
@@ -63,7 +63,7 @@ struct SavedUser<'a> {
 }
 
 // Instantiate a struct from an HList. Note that you can go the other way too.
-let a_user: ApiUser = frunk::from_generic(hlist!["Joe", "Blow", 30]);
+let a_user: ApiUser = ordofp::from_generic(hlist!["Joe", "Blow", 30]);
 
 // Convert using Generic
 let n_user: NewUser = Generic::convert_from(a_user); // done
@@ -75,7 +75,7 @@ let n_user: NewUser = Generic::convert_from(a_user); // done
 //
 // Also note that we're using a helper method to avoid having to use universal
 // function call syntax
-let s_user: SavedUser = frunk::labelled_convert_from(n_user);
+let s_user: SavedUser = ordofp::labelled_convert_from(n_user);
 
 assert_eq!(s_user.first_name, "Joe");
 assert_eq!(s_user.last_name, "Blow");
@@ -92,7 +92,7 @@ struct DeletedUser<'a> {
 
 // This will, however, work, because we make use of the Sculptor type-class
 // to type-safely reshape the representations to align/match each other.
-let d_user: DeletedUser = frunk::transform_from(s_user);
+let d_user: DeletedUser = ordofp::transform_from(s_user);
 assert_eq!(d_user.first_name, "Joe");
 # }
 ```"#
@@ -111,7 +111,7 @@ assert_eq!(d_user.first_name, "Joe");
 //! as long as B's fields and their subfields are subsets of A's fields and their respective subfields,
 //! then A can be turned into B.
 //!
-//! As usual, the goal with Frunk is to do this:
+//! As usual, the goal with OrdoFP is to do this:
 //! * Using stable (so no specialisation, which would have been helpful, methinks)
 //! * Typesafe
 //! * No usage of `unsafe`
@@ -120,8 +120,8 @@ assert_eq!(d_user.first_name, "Joe");
 //!
 //! ```rust
 //! # fn main() {
-//! use frunk::LabelledGeneric;
-//! use frunk::labelled::Transmogrifier;
+//! use ordofp::LabelledGeneric;
+//! use ordofp::labelled::Transmogrifier;
 //!
 //! #[derive(LabelledGeneric)]
 //! struct InternalPhoneNumber {
@@ -198,8 +198,8 @@ assert_eq!(d_user.first_name, "Joe");
 //! ```
 //!
 //! Links:
-//!   1. [Source on Github](https://github.com/lloydmeta/frunk)
-//!   2. [Crates.io page](https://crates.io/crates/frunk)
+//!   1. [Source on Github](https://github.com/lloydmeta/ordofp)
+//!   2. [Crates.io page](https://crates.io/crates/ordofp)
 
 #[cfg(feature = "alloc")]
 extern crate alloc;
@@ -212,8 +212,8 @@ pub mod semigroup;
 #[cfg(feature = "validated")]
 pub mod validated;
 
-pub use frunk_core::*;
-pub use frunk_derives::*;
+pub use ordofp_core::*;
+pub use ordofp_derives::*;
 
 // Root-level reexports so that users don't need to guess where things are located.
 //
@@ -221,7 +221,7 @@ pub use frunk_derives::*;
 //
 // * Datatypes and free functions intended for human consumption.
 //   * **Exception:** things that benefit from being namespaced,
-//     like `frunk::semigroup::Any`
+//     like `ordofp::semigroup::Any`
 //
 // * Traits that users ought to care enough about to `use` it **by name:**
 //   * ...because users might want to `impl` it for their own types
@@ -230,8 +230,8 @@ pub use frunk_derives::*;
 //     (that's what the prelude is for!)
 
 // NOTE: without `#[doc(no_inline)]`, rustdoc will generate two separate pages for
-//       each item (one in `frunk::` and another in `frunk_core::module::`).
-//       Hyperlinks will be broken for the ones in `frunk::`, so we need to prevent it.
+//       each item (one in `ordofp::` and another in `ordofp_core::module::`).
+//       Hyperlinks will be broken for the ones in `ordofp::`, so we need to prevent it.
 
 #[doc(no_inline)]
 pub use crate::hlist::lift_from;
@@ -283,11 +283,20 @@ pub use crate::monoid::Monoid;
 #[cfg(feature = "validated")]
 pub use crate::validated::Validated;
 
+#[doc(no_inline)]
+pub use crate::gat::Applicative;
+#[doc(no_inline)]
+pub use crate::gat::Apply;
+#[doc(no_inline)]
+pub use crate::gat::Functor;
+#[doc(no_inline)]
+pub use crate::gat::Monad;
+
 pub mod prelude {
-    //! Traits that need to be imported for the complete `frunk` experience.
+    //! Traits that need to be imported for the complete `ordofp` experience.
     //!
-    //! The intent here is that `use frunk::prelude::*` is enough to provide
-    //! access to any missing methods advertised in frunk's documentation.
+    //! The intent here is that `use ordofp::prelude::*` is enough to provide
+    //! access to any missing methods advertised in ordofp's documentation.
 
     #[doc(no_inline)]
     pub use crate::hlist::HList; // for LEN
@@ -299,4 +308,13 @@ pub mod prelude {
     #[doc(no_inline)]
     #[cfg(feature = "validated")]
     pub use crate::validated::IntoValidated;
+
+    #[doc(no_inline)]
+    pub use crate::gat::Applicative;
+    #[doc(no_inline)]
+    pub use crate::gat::Apply;
+    #[doc(no_inline)]
+    pub use crate::gat::Functor;
+    #[doc(no_inline)]
+    pub use crate::gat::Monad;
 }

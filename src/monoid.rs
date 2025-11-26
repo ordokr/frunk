@@ -13,7 +13,7 @@ their values are summed in the new map?
 ```
 # extern crate std;
 # use std::collections::HashMap;
-use frunk::{monoid, Monoid};
+use ordofp::{monoid, Monoid};
 
 let vec_of_no_hashmaps: Vec<HashMap<i32, String>> = Vec::new();
 assert_eq!(monoid::combine_all(&vec_of_no_hashmaps),
@@ -52,7 +52,7 @@ pub trait Monoid: Semigroup {
     /// # Examples
     ///
     /// ```
-    /// use frunk::Monoid;
+    /// use ordofp::Monoid;
     ///
     /// assert_eq!(<i16 as Monoid>::empty(), 0);
     /// ```
@@ -64,7 +64,7 @@ pub trait Monoid: Semigroup {
 /// # Examples
 ///
 /// ```
-/// use frunk::monoid;
+/// use ordofp::monoid;
 ///
 /// assert_eq!(monoid::combine_n(&Some(2), 4), Some(8));
 /// ```
@@ -89,7 +89,7 @@ where
 # extern crate alloc;
 # use alloc::vec::Vec;
 # use alloc::string::String;
-use frunk::monoid::combine_all;
+use ordofp::monoid::combine_all;
 
 assert_eq!(combine_all(&vec![Some(1), Some(3)]), Some(4));
 

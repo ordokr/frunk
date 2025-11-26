@@ -1,10 +1,10 @@
 #![feature(test)]
 
 #[macro_use]
-extern crate frunk;
+extern crate ordofp;
 extern crate test;
 
-use frunk::validated::*;
+use ordofp::validated::*;
 use test::Bencher;
 
 fn yah_nah(yah: bool) -> Result<i32, String> {

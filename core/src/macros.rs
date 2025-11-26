@@ -8,7 +8,7 @@
 /// # Examples
 ///
 /// ```
-/// # use frunk_core::hlist;
+/// # use ordofp_core::hlist;
 /// # fn main() {
 /// let h = hlist![13.5f32, "hello", Some(41)];
 /// let (h1, (h2, h3)) = h.into_tuple2();
@@ -47,7 +47,7 @@ macro_rules! hlist {
 /// # Examples
 ///
 /// ```
-/// # use frunk_core::{hlist, hlist_pat};
+/// # use ordofp_core::{hlist, hlist_pat};
 /// # fn main() {
 /// let h = hlist![13.5f32, "hello", Some(41)];
 /// let hlist_pat![a1, a2, a3] = h;
@@ -94,7 +94,7 @@ macro_rules! hlist_pat {
 /// # Examples
 ///
 /// ```
-/// # use frunk_core::{hlist, HList};
+/// # use ordofp_core::{hlist, HList};
 /// # fn main() {
 /// let h: HList!(f32, &str, Option<i32>) = hlist![13.5f32, "hello", Some(41)];
 ///
@@ -121,7 +121,7 @@ macro_rules! HList {
 ///
 /// ```
 /// # fn main() {
-/// use frunk_core::Coprod;
+/// use ordofp_core::Coprod;
 ///
 /// type I32Bool = Coprod!(i32, bool);
 /// let co1 = I32Bool::inject(3);
@@ -152,8 +152,8 @@ macro_rules! Coprod {
 /// # Examples
 ///
 /// ```
-/// use frunk::labelled::chars::*;
-/// use frunk_core::field;
+/// use ordofp::labelled::chars::*;
+/// use ordofp_core::field;
 /// # fn main() {
 /// let labelled = field![(n,a,m,e), "joe"];
 /// assert_eq!(labelled.name, "name");
@@ -167,7 +167,7 @@ macro_rules! Coprod {
 ///
 /// ```
 /// # fn main() {
-/// use frunk_core::field;
+/// use ordofp_core::field;
 /// enum first_name {}
 /// let labelled = field![first_name, "Joe"];
 /// assert_eq!(labelled.name, "first_name");
@@ -179,8 +179,8 @@ macro_rules! Coprod {
 ///   _and_ a custom name, passed as the last argument in the macro
 ///
 /// ```
-/// use frunk::labelled::chars::*;
-/// use frunk_core::field;
+/// use ordofp::labelled::chars::*;
+/// use ordofp_core::field;
 /// # fn main() {
 /// // useful aliasing of our type-level string
 /// type age = (a, g, e);
@@ -221,7 +221,7 @@ macro_rules! field {
 ///
 /// ```
 /// # fn main() {
-/// use frunk_core::{Coprod, poly_fn};
+/// use ordofp_core::{Coprod, poly_fn};
 /// type I32F32Str<'a> = Coprod!(i32, f32, &'a str);
 ///
 /// let co1 = I32F32Str::inject("lollerskates");

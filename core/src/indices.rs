@@ -1,6 +1,6 @@
 //! Types used for indexing into HLists and coproducts.
 //!
-//! frunk frequently uses phantom index types as a technique to avoid
+//! ordofp frequently uses phantom index types as a technique to avoid
 //! overlapping impls for some traits.
 //!
 //! Currently, `Index` type parameters in traits are not ever really intended

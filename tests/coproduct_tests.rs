@@ -1,4 +1,4 @@
-use frunk_core::{hlist, Coprod};
+use ordofp_core::{hlist, Coprod};
 
 #[test]
 fn test_inject_coproduct() {

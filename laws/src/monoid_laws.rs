@@ -7,17 +7,17 @@
 //!
 //! ```
 //! # extern crate quickcheck;
-//! # extern crate frunk_laws;
-//! # extern crate frunk;
+//! # extern crate ordofp_laws;
+//! # extern crate ordofp;
 //! # use quickcheck::quickcheck;
-//! # use frunk::semigroup::*;
+//! # use ordofp::semigroup::*;
 //! # fn main() {
-//! use frunk_laws::monoid_laws::*;
+//! use ordofp_laws::monoid_laws::*;
 //! quickcheck(left_identity as fn(String) -> bool);
 //! quickcheck(right_identity as fn(String) -> bool);
 //! # }
 //! ```
-use frunk::monoid::*;
+use ordofp::monoid::*;
 
 /// Left identity law
 ///
@@ -27,12 +27,12 @@ use frunk::monoid::*;
 ///
 /// ```
 /// # extern crate quickcheck;
-/// # extern crate frunk_laws;
-/// # extern crate frunk;
+/// # extern crate ordofp_laws;
+/// # extern crate ordofp;
 /// # use quickcheck::quickcheck;
-/// # use frunk::semigroup::*;
+/// # use ordofp::semigroup::*;
 /// # fn main() {
-/// use frunk_laws::monoid_laws::*;
+/// use ordofp_laws::monoid_laws::*;
 /// quickcheck(left_identity as fn(String) -> bool);
 /// # }
 /// ```
@@ -47,12 +47,12 @@ pub fn left_identity<A: Monoid + Eq>(a: A) -> bool {
 ///
 /// ```
 /// # extern crate quickcheck;
-/// # extern crate frunk_laws;
-/// # extern crate frunk;
+/// # extern crate ordofp_laws;
+/// # extern crate ordofp;
 /// # use quickcheck::quickcheck;
-/// # use frunk::semigroup::*;
+/// # use ordofp::semigroup::*;
 /// # fn main() {
-/// use frunk_laws::monoid_laws::*;
+/// use ordofp_laws::monoid_laws::*;
 /// quickcheck(right_identity as fn(String) -> bool);
 /// # }
 /// ```
@@ -64,7 +64,7 @@ pub fn right_identity<A: Monoid + Eq>(a: A) -> bool {
 mod tests {
     use super::*;
     use crate::wrapper::*;
-    use frunk::semigroup::*;
+    use ordofp::semigroup::*;
     use quickcheck::quickcheck;
     use std::collections::{HashMap, HashSet};
 

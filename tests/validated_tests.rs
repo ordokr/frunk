@@ -1,9 +1,9 @@
 #![cfg(feature = "validated")]
 
-extern crate frunk;
-extern crate frunk_core;
+extern crate ordofp;
+extern crate ordofp_core;
 
-use frunk::prelude::*;
+use ordofp::prelude::*;
 
 mod common;
 use crate::common::*;
@@ -41,7 +41,7 @@ fn get_age(yah_nah: YahNah) -> Result<usize, Nope> {
 #[test]
 fn test_to_result_ok() {
     let v = get_name(YahNah::Yah).into_validated() + get_name(YahNah::Yah) + get_age(YahNah::Yah);
-    let person: Result<Person, _> = v.into_result().map(frunk::from_generic); // much simpler
+    let person: Result<Person, _> = v.into_result().map(ordofp::from_generic); // much simpler
     assert_eq!(
         person.unwrap(),
         Person {

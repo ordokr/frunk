@@ -4,7 +4,7 @@
 //!
 //! ```
 //! # fn main() {
-//! # use frunk_core::Coprod;
+//! # use ordofp_core::Coprod;
 //! // For simplicity, assign our Coproduct type to a type alias
 //! // This is purely optional.
 //! type I32Bool = Coprod!(i32, bool);
@@ -38,7 +38,7 @@
 //! Or, if you want to "fold" over all possible values of a coproduct
 //!
 //! ```
-//! # use frunk_core::{hlist, poly_fn, Coprod};
+//! # use ordofp_core::{hlist, poly_fn, Coprod};
 //! # fn main() {
 //! # type I32Bool = Coprod!(i32, bool);
 //! # let co1 = I32Bool::inject(3);
@@ -85,7 +85,7 @@ use serde::{Deserialize, Serialize};
 ///
 /// ```
 /// # fn main() {
-/// use frunk_core::Coprod;
+/// use ordofp_core::Coprod;
 ///
 /// type I32Bool = Coprod!(i32, bool);
 /// let co1 = I32Bool::inject(3);
@@ -132,8 +132,8 @@ impl<Head, Tail> Coproduct<Head, Tail> {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk::Coproduct;
-    /// use frunk_core::Coprod;
+    /// use ordofp::Coproduct;
+    /// use ordofp_core::Coprod;
     ///
     /// type I32F32 = Coprod!(i32, f32);
     ///
@@ -174,7 +174,7 @@ impl<Head, Tail> Coproduct<Head, Tail> {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk_core::Coprod;
+    /// use ordofp_core::Coprod;
     ///
     /// type I32F32 = Coprod!(i32, f32);
     ///
@@ -206,7 +206,7 @@ impl<Head, Tail> Coproduct<Head, Tail> {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk_core::Coprod;
+    /// use ordofp_core::Coprod;
     ///
     /// type I32F32 = Coprod!(i32, f32);
     ///
@@ -242,7 +242,7 @@ impl<Head, Tail> Coproduct<Head, Tail> {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk_core::Coprod;
+    /// use ordofp_core::Coprod;
     ///
     /// type I32F32 = Coprod!(i32, f32);
     /// type I32 = Coprod!(i32); // remainder after uninjecting f32
@@ -273,7 +273,7 @@ impl<Head, Tail> Coproduct<Head, Tail> {
     ///
     /// ```rust
     /// # fn main() {
-    /// use frunk_core::Coprod;
+    /// use ordofp_core::Coprod;
     ///
     /// type I32F32 = Coprod!(i32, f32);
     ///
@@ -324,7 +324,7 @@ impl<Head, Tail> Coproduct<Head, Tail> {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk_core::Coprod;
+    /// use ordofp_core::Coprod;
     ///
     /// type I32BoolF32 = Coprod!(i32, bool, f32);
     /// type I32F32 = Coprod!(i32, f32);
@@ -352,8 +352,8 @@ impl<Head, Tail> Coproduct<Head, Tail> {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk_core::{Coprod, hlist};
-    /// use frunk_core::coproduct::Coproduct;
+    /// use ordofp_core::{Coprod, hlist};
+    /// use ordofp_core::coproduct::Coproduct;
     ///
     /// fn handle_stringly_things(co: Coprod!(&'static str, String)) -> String {
     ///     co.fold(hlist![
@@ -434,7 +434,7 @@ impl<Head, Tail> Coproduct<Head, Tail> {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk_core::Coprod;
+    /// use ordofp_core::Coprod;
     ///
     /// type I32BoolF32 = Coprod!(i32, bool, f32);
     /// type BoolI32 = Coprod!(bool, i32);
@@ -466,8 +466,8 @@ impl<Head, Tail> Coproduct<Head, Tail> {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk::Coproduct;
-    /// use frunk_core::Coprod;
+    /// use ordofp::Coproduct;
+    /// use ordofp_core::Coprod;
     ///
     /// let co: Coprod!(i32, bool, String) = Coproduct::inject(true);
     ///
@@ -491,8 +491,8 @@ impl<Head, Tail> Coproduct<Head, Tail> {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk::Coproduct;
-    /// use frunk_core::Coprod;
+    /// use ordofp::Coproduct;
+    /// use ordofp_core::Coprod;
     ///
     /// let mut co: Coprod!(i32, bool, String) = Coproduct::inject(true);
     ///
@@ -521,7 +521,7 @@ impl<Head, Tail> Coproduct<Head, Tail> {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk_core::{Coprod, hlist};
+    /// use ordofp_core::{Coprod, hlist};
     ///
     /// type I32F32Bool = Coprod!(i32, f32, bool);
     ///
@@ -543,8 +543,8 @@ impl<Head, Tail> Coproduct<Head, Tail> {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk::{Poly, Func};
-    /// use frunk_core::Coprod;
+    /// use ordofp::{Poly, Func};
+    /// use ordofp_core::Coprod;
     ///
     /// type I32F32Bool = Coprod!(i32, f32, bool);
     ///
@@ -593,7 +593,7 @@ impl<Head, Tail> Coproduct<Head, Tail> {
     /// # Examples
     ///
     /// ```
-    /// use frunk::{hlist, Coprod};
+    /// use ordofp::{hlist, Coprod};
     ///
     /// type I32F32Bool = Coprod!(i32, f32, bool);
     /// type BoolStrU8 = Coprod!(bool, &'static str, u8);
@@ -618,7 +618,7 @@ impl<Head, Tail> Coproduct<Head, Tail> {
     /// your Coproduct.
     ///
     /// ```
-    /// use frunk::{poly_fn, Coprod};
+    /// use ordofp::{poly_fn, Coprod};
     ///
     /// type I32F32Bool = Coprod!(i32, f32, bool);
     ///
@@ -641,7 +641,7 @@ impl<Head, Tail> Coproduct<Head, Tail> {
     /// the same.
     ///
     /// ```
-    /// use frunk::Coprod;
+    /// use ordofp::Coprod;
     ///
     /// type IntInt = Coprod!(i32, i32);
     /// type BoolBool = Coprod!(bool, bool);
@@ -667,7 +667,7 @@ impl<T> Coproduct<T, CNil> {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk_core::Coprod;
+    /// use ordofp_core::Coprod;
     ///
     /// type I32Only = Coprod!(i32);
     /// let co = I32Only::inject(5);

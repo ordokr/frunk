@@ -6,7 +6,7 @@
 //! # Examples
 //!
 //! ```rust
-//! use frunk::Generic;
+//! use ordofp::Generic;
 //!
 //! # fn main() {
 //! #[derive(Generic)]
@@ -28,13 +28,13 @@
 //!     LastName: "Blow",
 //!     Age: 30,
 //! };
-//! let d_person: DomainPerson = frunk::convert_from(a_person); // done
+//! let d_person: DomainPerson = ordofp::convert_from(a_person); // done
 //! # }
 
 /// A trait that converts from a type to a generic representation.
 ///
 /// For the most part, you should be using the derivation that is available
-/// through `frunk_derive` to generate instances of this trait for your types.
+/// through `ordofp_derive` to generate instances of this trait for your types.
 ///
 /// # Laws
 ///
@@ -49,7 +49,7 @@
 /// # Examples
 ///
 /// ```rust
-/// use frunk::Generic;
+/// use ordofp::Generic;
 ///
 /// # fn main() {
 /// #[derive(Generic)]
@@ -71,7 +71,7 @@
 ///     LastName: "Blow",
 ///     Age: 30,
 /// };
-/// let d_person: DomainPerson = frunk::convert_from(a_person); // done
+/// let d_person: DomainPerson = ordofp::convert_from(a_person); // done
 /// # }
 /// ```
 pub trait Generic {

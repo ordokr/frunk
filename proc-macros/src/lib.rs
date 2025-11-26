@@ -1,20 +1,20 @@
 #![doc(html_playground_url = "https://play.rust-lang.org/")]
-//! Frunk Proc Macros
+//! OrdoFP Proc Macros
 //!
-//! This library holds procedural macros for frunk
+//! This library holds procedural macros for ordofp
 //!
 //! Links:
-//!   1. [Source on Github](https://github.com/lloydmeta/frunk)
-//!   2. [Crates.io page](https://crates.io/crates/frunk)
+//!   1. [Source on Github](https://github.com/lloydmeta/ordofp)
+//!   2. [Crates.io page](https://crates.io/crates/ordofp)
 
-extern crate frunk_core;
-extern crate frunk_proc_macro_helpers;
+extern crate ordofp_core;
+extern crate ordofp_proc_macro_helpers;
 extern crate proc_macro;
 
 extern crate quote;
 extern crate syn;
 
-use frunk_proc_macro_helpers::*;
+use ordofp_proc_macro_helpers::*;
 use proc_macro::TokenStream;
 use quote::quote;
 use syn::{parse_macro_input, Expr};
@@ -26,7 +26,7 @@ pub fn path(input: TokenStream) -> TokenStream {
     let path_type = build_path_type(expr);
     let ast = quote! {
         {
-            let p: #path_type = ::frunk_core::path::Path::new();
+            let p: #path_type = ::ordofp_core::path::Path::new();
             p
         }
     };

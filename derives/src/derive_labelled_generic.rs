@@ -1,12 +1,12 @@
 use std::iter::repeat;
 
-use frunk_proc_macro_helpers::*;
+use ordofp_proc_macro_helpers::*;
 use proc_macro::TokenStream;
 use quote::ToTokens;
 use syn::Data;
 
 /// Given an AST, returns an implementation of Generic using HList with
-/// Field (see frunk_core::labelled) elements
+/// Field (see ordofp_core::labelled) elements
 ///
 /// Only works with Structs and Tuple Structs
 pub fn impl_labelled_generic(input: TokenStream) -> impl ToTokens {
@@ -33,7 +33,7 @@ pub fn impl_labelled_generic(input: TokenStream) -> impl ToTokens {
 
             quote! {
                 #[allow(non_snake_case, non_camel_case_types)]
-                impl #impl_generics ::frunk_core::labelled::LabelledGeneric for #name #ty_generics #where_clause {
+                impl #impl_generics ::ordofp_core::labelled::LabelledGeneric for #name #ty_generics #where_clause {
 
                     type Repr = #repr_type;
 
@@ -51,7 +51,7 @@ pub fn impl_labelled_generic(input: TokenStream) -> impl ToTokens {
                 }
 
                 #[allow(non_snake_case, non_camel_case_types)]
-                impl #impl_generics_ref ::frunk_core::labelled::IntoLabelledGeneric for & '_frunk_ref_ #name #ty_generics #where_clause_ref {
+                impl #impl_generics_ref ::ordofp_core::labelled::IntoLabelledGeneric for & '_ordofp_ref_ #name #ty_generics #where_clause_ref {
 
                     type Repr = #repr_type_ref;
 
@@ -64,7 +64,7 @@ pub fn impl_labelled_generic(input: TokenStream) -> impl ToTokens {
                 }
 
                 #[allow(non_snake_case, non_camel_case_types)]
-                impl #impl_generics_ref ::frunk_core::labelled::IntoLabelledGeneric for & '_frunk_ref_ mut #name #ty_generics #where_clause_ref {
+                impl #impl_generics_ref ::ordofp_core::labelled::IntoLabelledGeneric for & '_ordofp_ref_ mut #name #ty_generics #where_clause_ref {
 
                     type Repr = #repr_type_mut;
 
@@ -104,7 +104,7 @@ pub fn impl_labelled_generic(input: TokenStream) -> impl ToTokens {
 
             let base_impl = quote! {
                 #[allow(non_snake_case, non_camel_case_types)]
-                impl #impl_generics ::frunk_core::labelled::LabelledGeneric for #name #ty_generics #where_clause {
+                impl #impl_generics ::ordofp_core::labelled::LabelledGeneric for #name #ty_generics #where_clause {
 
                     type Repr = #repr_type;
 
@@ -131,7 +131,7 @@ pub fn impl_labelled_generic(input: TokenStream) -> impl ToTokens {
 
             let ref_impl = quote! {
                 #[allow(non_snake_case, non_camel_case_types)]
-                impl #impl_generics_ref ::frunk_core::labelled::IntoLabelledGeneric for & '_frunk_ref_ #name #ty_generics #where_clause_ref {
+                impl #impl_generics_ref ::ordofp_core::labelled::IntoLabelledGeneric for & '_ordofp_ref_ #name #ty_generics #where_clause_ref {
 
                     type Repr = #repr_type_ref;
 
@@ -149,7 +149,7 @@ pub fn impl_labelled_generic(input: TokenStream) -> impl ToTokens {
 
             let mut_impl = quote! {
                 #[allow(non_snake_case, non_camel_case_types)]
-                impl #impl_generics_ref ::frunk_core::labelled::IntoLabelledGeneric for & '_frunk_ref_ mut #name #ty_generics #where_clause_ref {
+                impl #impl_generics_ref ::ordofp_core::labelled::IntoLabelledGeneric for & '_ordofp_ref_ mut #name #ty_generics #where_clause_ref {
 
                     type Repr = #repr_type_mut;
 

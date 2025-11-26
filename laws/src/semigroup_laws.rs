@@ -4,17 +4,17 @@
 //!
 //! ```
 //! # extern crate quickcheck;
-//! # extern crate frunk_laws;
-//! # extern crate frunk;
+//! # extern crate ordofp_laws;
+//! # extern crate ordofp;
 //! # use quickcheck::quickcheck;
-//! # use frunk::semigroup::*;
+//! # use ordofp::semigroup::*;
 //! # fn main() {
-//! use frunk_laws::semigroup_laws::*;
+//! use ordofp_laws::semigroup_laws::*;
 //! quickcheck(associativity as fn(Vec<i8>, Vec<i8>, Vec<i8>) -> bool)
 //! # }
 //! ```
 
-use frunk::semigroup::*;
+use ordofp::semigroup::*;
 
 /// Function for checking adherence to the associativity law
 ///
@@ -24,12 +24,12 @@ use frunk::semigroup::*;
 ///
 /// ```
 /// # extern crate quickcheck;
-/// # extern crate frunk_laws;
-/// # extern crate frunk;
+/// # extern crate ordofp_laws;
+/// # extern crate ordofp;
 /// # use quickcheck::quickcheck;
-/// # use frunk::semigroup::*;
+/// # use ordofp::semigroup::*;
 /// # fn main() {
-/// use frunk_laws::semigroup_laws::*;
+/// use ordofp_laws::semigroup_laws::*;
 /// quickcheck(associativity as fn(Vec<i8>, Vec<i8>, Vec<i8>) -> bool)
 /// # }
 /// ```

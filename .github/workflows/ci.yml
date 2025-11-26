@@ -1,149 +1,111 @@
-on: [ push, pull_request ]
-
 name: Continuous integration
 
-jobs:
+on: [push, pull_request]
 
+jobs:
   fmt:
-    name: Basic sanity checks
+    name: Formatting
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: stable
-          override: true
-          components: rustfmt, clippy
-      - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/cargo@v1
-        name: formatting check
+          components: rustfmt
+      - run: cargo fmt --all -- --check
+
+  clippy:
+    name: Clippy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
         with:
-          command: fmt
-          args: --all -- --check
-      - uses: actions-rs/cargo@v1
-        name: clippy
-        with:
-          command: clippy
-          args: --all --tests -- -D warnings
+          components: clippy
+      - run: cargo clippy --all --tests -- -D warnings
 
   check:
     name: Check
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        toolchain: [ stable, nightly ]
-        use_std: [ y, n ]
+        toolchain: [stable, nightly]
+        use_std: [y, n]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions-rs/toolchain@v1
-        name: thumbv6m-none-eabi toolchain setup
-        if: ${{ matrix.use_std == 'y' }}
+      - uses: dtolnay/rust-toolchain@master
         with:
-          profile: minimal
           toolchain: ${{ matrix.toolchain }}
-          target: thumbv6m-none-eabi
-          override: true
-      - uses: actions-rs/toolchain@v1
-        name: std toolchain setup
-        if: ${{ matrix.use_std == 'n' }}
-        with:
-          profile: minimal
-          toolchain: ${{ matrix.toolchain }}
-          override: true
+          targets: thumbv6m-none-eabi
       - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/cargo@v1
-        name: thumbv6m-none-eabi check
+      
+      - name: Check no-std
         if: ${{ matrix.use_std == 'y' }}
-        with:
-          command: check
-          args: --target thumbv6m-none-eabi --no-default-features
-      - uses: actions-rs/cargo@v1
-        name: std check
+        run: cargo check --target thumbv6m-none-eabi --no-default-features
+        
+      - name: Check std
         if: ${{ matrix.use_std == 'n' }}
-        with:
-          command: check
+        run: cargo check
 
   build:
     name: Build
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        toolchain: [ stable, nightly ]
-        use_std: [ y, n ]
+        toolchain: [stable, nightly]
+        use_std: [y, n]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions-rs/toolchain@v1
-        name: thumbv6m-none-eabi toolchain setup
-        if: ${{ matrix.use_std == 'y' }}
+      - uses: dtolnay/rust-toolchain@master
         with:
-          profile: minimal
           toolchain: ${{ matrix.toolchain }}
-          target: thumbv6m-none-eabi
-          override: true
-      - uses: actions-rs/toolchain@v1
-        name: std toolchain setup
-        if: ${{ matrix.use_std == 'n' }}
-        with:
-          profile: minimal
-          toolchain: ${{ matrix.toolchain }}
-          override: true
+          targets: thumbv6m-none-eabi
       - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/cargo@v1
-        name: thumbv6m-none-eabi build
+
+      - name: Build no-std
         if: ${{ matrix.use_std == 'y' }}
-        with:
-          command: build
-          args: --target thumbv6m-none-eabi --no-default-features
-      - uses: actions-rs/cargo@v1
-        name: std build
+        run: cargo build --target thumbv6m-none-eabi --no-default-features
+
+      - name: Build std
         if: ${{ matrix.use_std == 'n' }}
-        with:
-          command: build
-      - uses: actions-rs/cargo@v1
-        name: std build examples
+        run: cargo build
+
+      - name: Build examples
         if: ${{ matrix.use_std == 'n' }}
-        with:
-          command: build
-          args: --examples
+        run: cargo build --examples
 
   test:
-    name: Test Suite
+    name: Test
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        toolchain: [ stable, nightly ]
+        toolchain: [stable, nightly]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@master
         with:
-          profile: minimal
           toolchain: ${{ matrix.toolchain }}
-          override: true
       - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/cargo@v1
-        name: std test all
-        with:
-          command: test
-          args: --all --no-fail-fast
+      - run: cargo test --all --no-fail-fast
 
-  doc_check:
-    name: Doc check
+  miri:
+    name: Miri
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        toolchain: [ stable, nightly ]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@nightly
         with:
-          profile: minimal
-          toolchain: ${{ matrix.toolchain }}
-          override: true
+          components: miri
       - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/cargo@v1
-        name: std doc check
+      - run: cargo miri test
         env:
-          RUSTDOCFLAGS: '-D warnings'
-        with:
-          command: doc
-          args: --all --no-deps  --document-private-items
+          MIRIFLAGS: -Zmiri-disable-isolation
+
+  doc:
+    name: Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo doc --all --no-deps --document-private-items
+        env:
+          RUSTDOCFLAGS: -D warnings

@@ -1,9 +1,9 @@
 #![feature(test)]
 
-extern crate frunk;
+extern crate ordofp;
 extern crate test;
 
-use frunk::semigroup::*;
+use ordofp::semigroup::*;
 use test::Bencher;
 
 #[bench]

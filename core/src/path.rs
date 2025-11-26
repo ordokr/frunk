@@ -1,8 +1,8 @@
 //! Holds models, traits, and logic for generic traversal of models
 //!
 //! ```
-//! # use frunk_proc_macros::path;
-//! # use frunk_derives::LabelledGeneric;
+//! # use ordofp_proc_macros::path;
+//! # use ordofp_derives::LabelledGeneric;
 //! # fn main() {
 //! #[derive(LabelledGeneric)]
 //! struct Address<'a> {
@@ -40,9 +40,9 @@
 //! shape-dependent functions on LabelledGeneric types.
 //!
 //! ```
-//! # use frunk_proc_macros::{path, Path};
-//! # use frunk_core::path::PathTraverser;
-//! # use frunk_derives::LabelledGeneric;
+//! # use ordofp_proc_macros::{path, Path};
+//! # use ordofp_core::path::PathTraverser;
+//! # use ordofp_derives::LabelledGeneric;
 //! # fn main() {
 //! #[derive(LabelledGeneric)]
 //! struct Dog<'a> {

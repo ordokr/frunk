@@ -18,8 +18,8 @@
 //!
 //! ```
 //! # fn main() {
-//! use frunk::labelled::chars::*;
-//! use frunk_core::field;
+//! use ordofp::labelled::chars::*;
+//! use ordofp_core::field;
 //!
 //! // Optionally alias our tuple that represents our type-level string
 //! type name = (n, a, m, e);
@@ -34,7 +34,7 @@
 //!
 //! ```
 //! // required when using custom derives
-//! use frunk::LabelledGeneric;
+//! use ordofp::LabelledGeneric;
 //!
 //! # fn main() {
 //! #[derive(LabelledGeneric)]
@@ -60,7 +60,7 @@
 //!
 //! // transform_from automagically sculpts the labelled generic
 //! // representation of the source object to that of the target type
-//! let s_user: ShortUser = frunk::transform_from(n_user); // done
+//! let s_user: ShortUser = ordofp::transform_from(n_user); // done
 //! # }
 //! ```
 //!
@@ -70,8 +70,8 @@
 //! ```
 //! // required when using custom derives
 //! # fn main() {
-//! use frunk::labelled::Transmogrifier;
-//! use frunk::LabelledGeneric;
+//! use ordofp::labelled::Transmogrifier;
+//! use ordofp::LabelledGeneric;
 //!
 //! #[derive(LabelledGeneric)]
 //! struct InternalPhoneNumber {
@@ -162,12 +162,12 @@ use core::marker::PhantomData;
 /// boilerplate free conversions between different structs.
 ///
 /// For the most part, you should be using the derivation that is available
-/// through `frunk_derive` to generate instances of this trait for your types.
+/// through `ordofp_derive` to generate instances of this trait for your types.
 ///
 /// # Examples
 ///
 /// ```rust
-/// use frunk::LabelledGeneric;
+/// use ordofp::LabelledGeneric;
 ///
 /// # fn main() {
 /// #[derive(LabelledGeneric)]
@@ -193,7 +193,7 @@ use core::marker::PhantomData;
 ///
 /// // transform_from automagically sculpts the labelled generic
 /// // representation of the source object to that of the target type
-/// let s_user: SavedUser = frunk::transform_from(n_user); // done
+/// let s_user: SavedUser = ordofp::transform_from(n_user); // done
 /// # }
 pub trait LabelledGeneric {
     /// The labelled generic representation type.
@@ -338,10 +338,10 @@ pub mod chars {
     //! This is designed to be glob-imported:
     //!
     //! ```rust
-    //! # extern crate frunk;
+    //! # extern crate ordofp;
     //! # fn main() {
     //! # #[allow(unused)]
-    //! use frunk::labelled::chars::*;
+    //! use ordofp::labelled::chars::*;
     //! # }
     //! ```
 
@@ -385,8 +385,8 @@ pub mod chars {
 /// # Examples
 ///
 /// ```
-/// use frunk::labelled::chars::*;
-/// use frunk_core::field;
+/// use ordofp::labelled::chars::*;
+/// use ordofp_core::field;
 /// # fn main() {
 /// let labelled = field![(n,a,m,e), "joe"];
 /// assert_eq!(labelled.name, "name");
@@ -453,8 +453,8 @@ impl<T: fmt::Display> fmt::Debug for DebugAsDisplay<T> {
 /// # Examples
 ///
 /// ```
-/// use frunk::labelled::chars::*;
-/// use frunk::labelled::field_with_name;
+/// use ordofp::labelled::chars::*;
+/// use ordofp::labelled::field_with_name;
 ///
 /// let l = field_with_name::<(n,a,m,e),_>("name", "joe");
 /// assert_eq!(l.value, "joe");
@@ -480,9 +480,9 @@ pub trait IntoUnlabelled {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk::labelled::chars::*;
-    /// use frunk::labelled::IntoUnlabelled;
-    /// use frunk_core::{field, hlist};
+    /// use ordofp::labelled::chars::*;
+    /// use ordofp::labelled::IntoUnlabelled;
+    /// use ordofp_core::{field, hlist};
     ///
     /// let labelled_hlist = hlist![
     ///     field!((n, a, m, e), "joe"),
@@ -533,9 +533,9 @@ pub trait IntoValueLabelled {
     ///
     /// ```
     /// # fn main() {
-    /// use frunk::labelled::{ValueField, IntoValueLabelled};
-    /// use frunk::labelled::chars::*;
-    /// use frunk_core::{field, hlist, HList};
+    /// use ordofp::labelled::{ValueField, IntoValueLabelled};
+    /// use ordofp::labelled::chars::*;
+    /// use ordofp_core::{field, hlist, HList};
     ///
     /// let labelled_hlist = hlist![
     ///     field!((n, a, m, e), "joe"),
@@ -674,8 +674,8 @@ where
 /// ```
 /// // required when using custom derives
 /// # fn main() {
-/// use frunk::LabelledGeneric;
-/// use frunk::labelled::Transmogrifier;
+/// use ordofp::LabelledGeneric;
+/// use ordofp::labelled::Transmogrifier;
 /// #[derive(LabelledGeneric)]
 /// struct InternalPhoneNumber {
 ///     emergency: Option<usize>,

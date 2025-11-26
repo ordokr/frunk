@@ -1,5 +1,5 @@
-use frunk::{convert_from, from_generic, into_generic};
-use frunk_core::hlist;
+use ordofp::{convert_from, from_generic, into_generic};
+use ordofp_core::hlist;
 
 mod common;
 use crate::common::*;
@@ -43,7 +43,7 @@ fn test_struct_conversion() {
         last_name: "Cannon",
         age: 3,
     };
-    let pres: President = frunk::convert_from(a);
+    let pres: President = ordofp::convert_from(a);
     assert_eq!(
         pres,
         President {
